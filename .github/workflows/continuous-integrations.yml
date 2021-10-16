@@ -21,6 +21,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{secrets.PAT}}
       - name: merge
       - run: git checkout ${GITHUB_REF#refs/heads/}
       - run: git rebase origin/master
