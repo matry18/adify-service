@@ -43,8 +43,9 @@ class AdifyServiceTest {
     MockService a = new MockService(new Adify(new HerokuGetRequest("adify")), "SESSION_ID,USER_ID,PRODUCT_ID", spy);
     a.execute();
     assertEquals("SESSION_ID", spy.body.split(",")[0]);
-    assertEquals("USER_ID", spy.body.split(",")[1]);
+    assertEquals("advert", spy.body.split(",")[1]);
     assertEquals("PRODUCT_ID", spy.body.split(",")[2]);
+    assertEquals("PRODUCT_NAME", spy.body.split(",")[3]);
   }
 
 }
