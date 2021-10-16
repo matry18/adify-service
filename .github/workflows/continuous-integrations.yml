@@ -15,6 +15,8 @@ jobs:
 
       - name: Compile
         run: mvn install
+      - name: fastTest
+        run: mvn test -DskipTests=false -Dgroups=fast
       - name: Merge
         run: | 
           git checkout ${GITHUB_REF#refs/heads/}
@@ -22,6 +24,4 @@ jobs:
           git branch master
           git push origin master:master
           git push origin :${GITHUB_REF#refs/heads/}
-
       
- 
