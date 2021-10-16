@@ -16,11 +16,12 @@ jobs:
       - name: Compile
         run: mvn install
       - name: Merge
-        run: git checkout ${GITHUB_REF#refs/heads/} && \
-             git rebase origin/master && \
-             git checkout master && \
-             git push origin master:master && \
-             git push origin :${GITHUB_REF#refs/heads/}
+        run: | 
+          git checkout ${GITHUB_REF#refs/heads/}
+          git rebase origin/master
+          git branch master
+          git push origin master:master
+          git push origin :${GITHUB_REF#refs/heads/}
 
       
  
