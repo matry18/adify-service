@@ -25,23 +25,4 @@ jobs:
           git push origin master:master
           git push origin :${GITHUB_REF#refs/heads/}
 
-name: Deploy
-on:
-  push:
-    branches:
-      - "master"
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      #- uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          fetch-depth: 0
-          token: ${{secrets.PAT}}
-      - name: slow Test
-        run: mvn test -DskipTests=false -Dgroups=slow
-        #  heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        #  heroku_app_name: "YOUR APP's NAME" #Must be unique in Heroku
-        #  heroku_email: "YOUR EMAIL"
 
