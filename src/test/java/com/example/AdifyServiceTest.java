@@ -9,10 +9,12 @@ class AdifyServiceTest {
 
   class SenderSpy implements Subscription.Sender {
     String event;
+    String body;
 
     @Override
     public void send(String event, String body) {
       this.event = event;
+      this.body = body;
     }
   }
 
@@ -23,6 +25,16 @@ class AdifyServiceTest {
     AdifyService a = new AdifyService(new Adify(new HerokuGetRequest("adify")), "SESSION_ID,USER_ID,PRODUCT_ID", spy);
     a.execute();
     assertEquals("display", spy.event);
+  }
+
+  @Test
+  @Tag("slow")
+  void fetchProductPageEvent_sendsDisplayEvent() {
+    SenderSpy spy = new SenderSpy();
+    //spy.send("fetch-product-page","SESSION_ID,advert,PRODUCT_ID,PRODUCT_NAME");
+    AdifyService a = new AdifyService(new Adify(new HerokuGetRequest("adify")), "SESSION_ID,USER_ID,PRODUCT_ID", spy);
+    a.execute();
+    assertEquals("SESSION_ID,advert,PRODUCT_ID,PRODUCT_NAME", spy.body);
   }
 
 }
