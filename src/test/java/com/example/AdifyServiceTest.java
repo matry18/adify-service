@@ -45,7 +45,7 @@ class AdifyServiceTest {
     assertEquals("SESSION_ID", spy.body.split(",")[0]);
     assertEquals("advert", spy.body.split(",")[1]);
     assertEquals("PRODUCT_ID", spy.body.split(",")[2]);
-    assertEquals("PRODUCT_NAME", spy.body.split(",")[3]);
+    assertEquals("PRODUCT", spy.body.split(",")[3]);
   }
 
 }
